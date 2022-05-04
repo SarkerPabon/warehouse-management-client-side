@@ -1,4 +1,11 @@
 import { useState } from "react";
+import {
+	useCreateUserWithEmailAndPassword,
+	useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
+import auth from "../../firebase.init";
+import Loader from "../Share/Loader";
 
 const Registration = () => {
 	const [name, setName] = useState("");
@@ -10,7 +17,20 @@ const Registration = () => {
 		confrimError: "",
 	});
 
-	const handleSubmit = (e) => {
+	const [createUserWithEmailAndPassword, user, loading, error] =
+		useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
+
+	const [updateProfile] = useUpdateProfile(auth);
+
+	if (user) {
+		console.log(user.user);
+	}
+
+	if (loading) {
+		return <Loader />;
+	}
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (password.length < 6) {
@@ -26,6 +46,19 @@ const Registration = () => {
 		}
 
 		console.log(name, email, password, confirmPassword);
+
+		await createUserWithEmailAndPassword(email, password);
+		toast.success("User Created Successfully", {
+			toastId: "user-created-successfully",
+			theme: "colored",
+		});
+
+		await updateProfile({ displayName: name });
+		toast.success("Verification Email Send", {
+			toastId: "verification-email",
+			theme: "dark",
+		});
+		e.target.reset();
 	};
 
 	return (
@@ -94,6 +127,7 @@ const Registration = () => {
 						</div>
 					)}
 				</div>
+				{error && <p className='text-danger'>{error.message}</p>}
 				<button type='submit' className='btn btn-secondary'>
 					Register
 				</button>
