@@ -1,12 +1,16 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import Registration from "./Pages/Authentication/Registration";
 
 function App() {
 	return (
-		<>
-			<div className='container'>
-				<h1 className='text-center'>App</h1>
-			</div>
-		</>
+		<BrowserRouter>
+			<Routes>
+				<Route path='/register' element={<Registration />} />
+			</Routes>
+			<ToastContainer />
+		</BrowserRouter>
 	);
 }
 
