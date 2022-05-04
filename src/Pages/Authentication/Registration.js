@@ -3,6 +3,7 @@ import {
 	useCreateUserWithEmailAndPassword,
 	useUpdateProfile,
 } from "react-firebase-hooks/auth";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loader from "../Share/Loader";
@@ -16,6 +17,7 @@ const Registration = () => {
 		lengthError: "",
 		confrimError: "",
 	});
+	const [agree, setAgree] = useState(false);
 
 	const [createUserWithEmailAndPassword, user, loading, error] =
 		useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
@@ -63,7 +65,7 @@ const Registration = () => {
 
 	return (
 		<div className='container my-5'>
-			<h1 className='text-center text-secondary'>Registration</h1>
+			<h1 className='text-center text-secondary my-3'>Registration</h1>
 			<form onSubmit={handleSubmit} className='w-50 mx-auto'>
 				<div className='mb-3'>
 					<input
@@ -128,9 +130,36 @@ const Registration = () => {
 					)}
 				</div>
 				{error && <p className='text-danger'>{error.message}</p>}
-				<button type='submit' className='btn btn-secondary'>
-					Register
-				</button>
+
+				<div className='my-3'>
+					<div className='form-check'>
+						<input
+							type='checkbox'
+							className='form-check-input'
+							id='checkout'
+							onClick={() => setAgree(!agree)}
+						/>
+						<label
+							className={`form-check-label  fs-6 ${
+								agree ? "text-muted" : "text-danger"
+							}`}
+							htmlFor='exampleCheck1'
+						>
+							Accept Terms & Conditions
+						</label>
+					</div>
+				</div>
+				<div className='d-flex justify-content-between'>
+					<button type='submit' className='btn btn-secondary' disabled={!agree}>
+						Register
+					</button>
+					<p className='text-secondary'>
+						Already Registered? Go{" "}
+						<Link to='/login' className='mt-2 text-muted fs-5'>
+							Sign In
+						</Link>
+					</p>
+				</div>
 			</form>
 		</div>
 	);
