@@ -132,7 +132,7 @@ const Login = () => {
 					</Link>
 				</div>
 				<button type='submit' className='btn btn-secondary'>
-					Register
+					Login
 				</button>
 			</form>
 

@@ -18,17 +18,22 @@ const Header = () => {
 						<Nav.Link as={NavLink} to='/' className='text-white'>
 							Home
 						</Nav.Link>
-						<Nav.Link as={NavLink} to='/products' className='text-white'>
-							Manage Products
-						</Nav.Link>
 
 						{user ? (
-							<button
-								onClick={() => signOut(auth)}
-								className='btn btn-primray btn-link text-white text-decoration-none'
-							>
-								Sign Out
-							</button>
+							<>
+								<Nav.Link as={NavLink} to='/products' className='text-white'>
+									Manage Products
+								</Nav.Link>
+								<Nav.Link as={NavLink} to='/addProduct' className='text-white'>
+									Add Product
+								</Nav.Link>
+								<button
+									onClick={() => signOut(auth)}
+									className='btn btn-primray btn-link text-white text-decoration-none'
+								>
+									Sign Out
+								</button>
+							</>
 						) : (
 							<>
 								<Nav.Link as={NavLink} to='/register' className='text-white'>

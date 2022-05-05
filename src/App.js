@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AddProduct from "./Pages/AddProduct";
 import Login from "./Pages/Authentication/Login";
 import Registration from "./Pages/Authentication/Registration";
 import RequiredAuth from "./Pages/Authentication/RequiredAuth";
@@ -22,6 +23,14 @@ function App() {
 					element={
 						<RequiredAuth>
 							<Products />
+						</RequiredAuth>
+					}
+				/>
+				<Route
+					path='/addProduct'
+					element={
+						<RequiredAuth>
+							<AddProduct />
 						</RequiredAuth>
 					}
 				/>
