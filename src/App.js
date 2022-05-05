@@ -5,12 +5,14 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./Pages/Authentication/Login";
 import Registration from "./Pages/Authentication/Registration";
 import RequiredAuth from "./Pages/Authentication/RequiredAuth";
+import Header from "./Pages/Header";
 import Home from "./Pages/Home";
 import Products from "./Pages/Products/Products";
 
 function App() {
 	return (
 		<BrowserRouter>
+			<Header />
 			<Routes>
 				<Route path='/' element={<Home />} />
 				<Route path='/login' element={<Login />} />
