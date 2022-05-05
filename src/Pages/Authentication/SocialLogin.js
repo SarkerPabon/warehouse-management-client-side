@@ -1,4 +1,5 @@
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { Navigate, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
 import google from "../../images/social/google.png";
 import Loader from "../Share/Loader";
@@ -7,8 +8,13 @@ const SocialLogin = () => {
 	const [signInWithGoogle, googleUser, googleLoading, googleError] =
 		useSignInWithGoogle(auth);
 
+	const location = useLocation();
+
+	let from = location.state?.from?.pathname || "/";
+
 	if (googleUser) {
 		console.log("Google User: ", googleUser);
+		return <Navigate to={from} replace={true} />;
 	}
 
 	let errorElement;

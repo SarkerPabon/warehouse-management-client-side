@@ -3,7 +3,7 @@ import {
 	useSendPasswordResetEmail,
 	useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loader from "../Share/Loader";
@@ -17,13 +17,18 @@ const Login = () => {
 		passwordResetError: "",
 	});
 
+	const location = useLocation();
+
+	let from = location.state?.from?.pathname || "/";
+
 	const [signInWithEmailAndPassword, user, loading, error] =
 		useSignInWithEmailAndPassword(auth);
 
 	const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
 
 	if (user) {
-		console.log(user.user);
+		console.log("Login User: ", user.user);
+		return <Navigate to={from} replace={true} />;
 	}
 
 	if (loading) {

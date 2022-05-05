@@ -3,7 +3,7 @@ import {
 	useCreateUserWithEmailAndPassword,
 	useUpdateProfile,
 } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loader from "../Share/Loader";
@@ -20,13 +20,18 @@ const Registration = () => {
 	});
 	const [agree, setAgree] = useState(false);
 
+	const location = useLocation();
+
+	let from = location.state?.from?.pathname || "/";
+
 	const [createUserWithEmailAndPassword, user, loading, error] =
 		useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
 
 	const [updateProfile] = useUpdateProfile(auth);
 
 	if (user) {
-		console.log(user.user);
+		console.log("Registration User: ", user.user);
+		return <Navigate to={from} replace={true} />;
 	}
 
 	if (loading) {
