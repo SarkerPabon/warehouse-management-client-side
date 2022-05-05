@@ -82,6 +82,7 @@ const Registration = () => {
 						placeholder='Enter Your Name'
 						value={name}
 						onChange={(e) => setName(e.target.value)}
+						required
 					/>
 				</div>
 				<div className='mb-3'>
@@ -93,6 +94,7 @@ const Registration = () => {
 						placeholder='Enter Your Email Address'
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						required
 					/>
 				</div>
 				<div className='mb-3'>
@@ -104,6 +106,7 @@ const Registration = () => {
 						placeholder='Enter Your Password'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
+						required
 					/>
 					{formError.lengthError ? (
 						<div id='confirmPassword' className='form-text text-danger'>
@@ -124,6 +127,7 @@ const Registration = () => {
 						placeholder='Enter Your Confirm Password'
 						value={confirmPassword}
 						onChange={(e) => setConfirmPassword(e.target.value)}
+						required
 					/>
 					{formError.confrimError ? (
 						<div id='confirmPassword' className='form-text text-danger'>

@@ -91,6 +91,7 @@ const Login = () => {
 						placeholder='Enter Your Email Address'
 						value={email}
 						onChange={(e) => setEmail(e.target.value)}
+						required
 					/>
 					{formError.passwordResetError && (
 						<p className='text-danger'>{formError.passwordResetError}</p>
@@ -105,6 +106,7 @@ const Login = () => {
 						placeholder='Enter Your Password'
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
+						required
 					/>
 					{formError.lengthError ? (
 						<div id='confirmPassword' className='form-text text-danger'>
