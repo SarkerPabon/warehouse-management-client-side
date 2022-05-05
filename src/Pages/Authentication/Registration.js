@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
 import Loader from "../Share/Loader";
+import SocialLogin from "./SocialLogin";
 
 const Registration = () => {
 	const [name, setName] = useState("");
@@ -161,6 +162,8 @@ const Registration = () => {
 					</p>
 				</div>
 			</form>
+
+			<SocialLogin />
 		</div>
 	);
 };
