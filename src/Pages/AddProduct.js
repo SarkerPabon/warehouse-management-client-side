@@ -1,23 +1,40 @@
+import axios from "axios";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
 
 const AddProduct = () => {
 	const user = useAuthState(auth);
+	const navigate = useNavigate();
 
 	const [name, setName] = useState("");
-	const [email, setEmail] = useState(user[0].email);
 	const [imgUrl, setImgUrl] = useState("");
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
 	const [quantity, setQuantity] = useState(0);
+	const [email, setEmail] = useState(user[0].email);
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+
+		console.log(name, imgUrl, description, price, quantity, email);
+		const product = { name, imgUrl, description, price, quantity, email };
+
+		axios
+			.post("https://wearhouse-management-mern.herokuapp.com/products", {
+				product,
+			})
+			.then((response) => navigate("/products"))
+			.catch((error) => console.log(error));
+	};
 
 	return (
 		<div className='container my-5 border broder-secondary'>
 			<div className='row justify-content-center'>
 				<div className='col-sm-12 col-md-6'>
 					<h1 className='text-center text-secondary my-3'>Add Product</h1>
-					<form>
+					<form onSubmit={handleSubmit}>
 						<div className='form-floating mb-3'>
 							<input
 								type='text'
@@ -41,7 +58,7 @@ const AddProduct = () => {
 								id='imgURL'
 								placeholder='Enter Product Image URL'
 								value={imgUrl}
-								onChange={(e) => setName(e.target.value)}
+								onChange={(e) => setImgUrl(e.target.value)}
 								required
 							/>
 							<label htmlFor='imgURL' className='form-label'>
