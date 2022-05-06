@@ -8,6 +8,7 @@ import RequiredAuth from "./Pages/Authentication/RequiredAuth";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
 import AddProduct from "./Pages/Products/AddProduct";
+import ProductDetails from "./Pages/Products/ProductDetails";
 import Products from "./Pages/Products/Products";
 
 function App() {
@@ -23,6 +24,14 @@ function App() {
 					element={
 						<RequiredAuth>
 							<Products />
+						</RequiredAuth>
+					}
+				/>
+				<Route
+					path='/products/:id'
+					element={
+						<RequiredAuth>
+							<ProductDetails />
 						</RequiredAuth>
 					}
 				/>

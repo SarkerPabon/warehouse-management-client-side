@@ -15,7 +15,7 @@ const SingleProduct = ({ product, handleDelete }) => {
 					</div>
 					<p className='card-text'>{description}</p>
 					<div className='d-flex justify-content-between'>
-						<Link to='#' className='btn btn-secondary d-block'>
+						<Link to={`/products/${_id}`} className='btn btn-secondary d-block'>
 							Details
 						</Link>
 						<button

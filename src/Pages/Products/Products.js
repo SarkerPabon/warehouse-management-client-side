@@ -7,7 +7,7 @@ import SingleProduct from "./SingleProduct";
 const Products = () => {
 	const [loading, setLoading] = useState(true);
 	const [products, setProducts] = useState([]);
-	console.log(products);
+	// console.log(products);
 
 	useEffect(() => {
 		axios

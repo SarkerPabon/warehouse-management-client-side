@@ -14,13 +14,22 @@ const AddProduct = () => {
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
 	const [quantity, setQuantity] = useState(0);
+	const [sold, setSold] = useState(0);
 	const [email, setEmail] = useState(user[0].email);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		console.log(name, imgUrl, description, price, quantity, email);
-		const product = { name, imgUrl, description, price, quantity, email };
+		console.log(name, imgUrl, description, price, quantity, email, sold);
+		const product = {
+			name,
+			imgUrl,
+			description,
+			price,
+			quantity: parseInt(quantity),
+			email,
+			sold: parseInt(sold),
+		};
 
 		axios
 			.post("https://wearhouse-management-mern.herokuapp.com/products", {
@@ -112,6 +121,19 @@ const AddProduct = () => {
 									required
 								/>
 								<label htmlFor='quantity'>Quantity</label>
+							</div>
+							<div className='form-floating col'>
+								<input
+									type='number'
+									className='form-control'
+									name='sold'
+									id='sold'
+									placeholder='Sold'
+									value={sold}
+									onChange={(e) => setSold(e.target.value)}
+									required
+								/>
+								<label htmlFor='quantity'>Sold</label>
 							</div>
 						</div>
 
