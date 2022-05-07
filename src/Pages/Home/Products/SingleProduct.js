@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const SingleProduct = ({ product, handleDelete }) => {
+const SingleProduct = ({ product }) => {
 	const { _id, name, supplierName, imgUrl, description, price, quantity } =
 		product;
 
@@ -22,12 +22,6 @@ const SingleProduct = ({ product, handleDelete }) => {
 						<Link to={`/products/${_id}`} className='btn btn-secondary d-block'>
 							Details
 						</Link>
-						<button
-							onClick={() => handleDelete(_id)}
-							className='btn btn-outline-secondary text-decoration-none'
-						>
-							Delete
-						</button>
 					</div>
 				</div>
 			</div>

@@ -10,6 +10,7 @@ const AddProduct = () => {
 	const navigate = useNavigate();
 
 	const [name, setName] = useState("");
+	const [supplierName, setSupplierName] = useState("");
 	const [imgUrl, setImgUrl] = useState("");
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
@@ -20,9 +21,19 @@ const AddProduct = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		console.log(name, imgUrl, description, price, quantity, email, sold);
+		console.log(
+			name,
+			supplierName,
+			imgUrl,
+			description,
+			price,
+			quantity,
+			email,
+			sold
+		);
 		const product = {
 			name,
+			supplierName,
 			imgUrl,
 			description,
 			price,
@@ -51,20 +62,37 @@ const AddProduct = () => {
 				<div className='col-sm-12 col-md-6'>
 					<h1 className='text-center text-secondary my-3'>Add Product</h1>
 					<form onSubmit={handleSubmit}>
-						<div className='form-floating mb-3'>
-							<input
-								type='text'
-								className='form-control'
-								name='name'
-								id='name'
-								placeholder='Enter Product Name'
-								value={name}
-								onChange={(e) => setName(e.target.value)}
-								required
-							/>
-							<label htmlFor='name' className='form-label'>
-								Product Name
-							</label>
+						<div className='row mb-3'>
+							<div className='form-floating col'>
+								<input
+									type='text'
+									className='form-control'
+									name='name'
+									id='name'
+									placeholder='Enter Product Name'
+									value={name}
+									onChange={(e) => setName(e.target.value)}
+									required
+								/>
+								<label htmlFor='name' className='form-label'>
+									Product Name
+								</label>
+							</div>
+							<div className='form-floating col'>
+								<input
+									type='text'
+									className='form-control'
+									name='supplierName'
+									id='supplierName'
+									placeholder='Enter Supplier Name'
+									value={supplierName}
+									onChange={(e) => setSupplierName(e.target.value)}
+									required
+								/>
+								<label htmlFor='name' className='form-label'>
+									Supplier Name
+								</label>
+							</div>
 						</div>
 						<div className='form-floating mb-3'>
 							<input

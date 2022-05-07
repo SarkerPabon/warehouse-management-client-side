@@ -17,6 +17,10 @@ const ProductsTable = () => {
 			accessor: "name",
 		},
 		{
+			Header: "Supplier Name",
+			accessor: "supplierName",
+		},
+		{
 			Header: "Image URL",
 			accessor: "imgUrl",
 			Cell: ({ row }) => {
