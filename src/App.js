@@ -29,7 +29,7 @@ function App() {
 					}
 				/>
 				<Route
-					path='/products/myProducts'
+					path='/myProducts'
 					element={
 						<RequiredAuth>
 							<MyProducts />
