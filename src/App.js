@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./Pages/Authentication/Login";
 import Registration from "./Pages/Authentication/Registration";
 import RequiredAuth from "./Pages/Authentication/RequiredAuth";
+import Footer from "./Pages/Footer";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
 import AddProduct from "./Pages/Products/AddProduct";
@@ -53,6 +54,7 @@ function App() {
 					}
 				/>
 			</Routes>
+			<Footer />
 			<ToastContainer />
 		</BrowserRouter>
 	);
