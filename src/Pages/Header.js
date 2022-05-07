@@ -24,6 +24,13 @@ const Header = () => {
 								<Nav.Link as={NavLink} to='/products' className='text-white'>
 									Manage Products
 								</Nav.Link>
+								<Nav.Link
+									as={NavLink}
+									to='/products/myProducts'
+									className='text-white'
+								>
+									{user.displayName ? user.displayName + " " : "My "} Products
+								</Nav.Link>
 								<Nav.Link as={NavLink} to='/addProduct' className='text-white'>
 									Add Product
 								</Nav.Link>

@@ -8,8 +8,9 @@ import RequiredAuth from "./Pages/Authentication/RequiredAuth";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home";
 import AddProduct from "./Pages/Products/AddProduct";
+import MyProducts from "./Pages/Products/MyProducts";
 import ProductDetails from "./Pages/Products/ProductDetails";
-import Products from "./Pages/Products/Products";
+import ProductsTable from "./Pages/Products/ProductsTable";
 
 function App() {
 	return (
@@ -23,7 +24,15 @@ function App() {
 					path='/products'
 					element={
 						<RequiredAuth>
-							<Products />
+							<ProductsTable />
+						</RequiredAuth>
+					}
+				/>
+				<Route
+					path='/products/myProducts'
+					element={
+						<RequiredAuth>
+							<MyProducts />
 						</RequiredAuth>
 					}
 				/>

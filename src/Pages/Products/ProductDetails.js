@@ -13,7 +13,7 @@ const ProductDetails = () => {
 
 	useEffect(() => {
 		axios
-			.get(`http://localhost:5000/products/${id}`)
+			.get(`https://wearhouse-management-mern.herokuapp.com/products/${id}`)
 			.then((response) => {
 				setLoading(false);
 				setProduct(response.data);
@@ -23,7 +23,7 @@ const ProductDetails = () => {
 
 	const handleDeliver = () => {
 		axios
-			.patch(`http://localhost:5000/products/${id}`)
+			.patch(`https://wearhouse-management-mern.herokuapp.com/products/${id}`)
 			.then((response) => setIsRefresh(!isRefresh))
 			.catch((error) => console.log(error));
 	};
