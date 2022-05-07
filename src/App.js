@@ -7,7 +7,7 @@ import Registration from "./Pages/Authentication/Registration";
 import RequiredAuth from "./Pages/Authentication/RequiredAuth";
 import Footer from "./Pages/Footer";
 import Header from "./Pages/Header";
-import Home from "./Pages/Home";
+import Home from "./Pages/Home/Home";
 import AddProduct from "./Pages/Products/AddProduct";
 import MyProducts from "./Pages/Products/MyProducts";
 import ProductDetails from "./Pages/Products/ProductDetails";

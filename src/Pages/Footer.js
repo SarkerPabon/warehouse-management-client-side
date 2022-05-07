@@ -1,11 +1,14 @@
 import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
 	return (
-		<footer className='bg-secondary text-white py-5'>
+		<footer className='bg-secondary text-white py-5 mt-5'>
 			<div className='container'>
 				<div className='d-flex flex-column flex-md-row justify-content-evenly align-items-center'>
-					<h3>Transport Inc</h3>
+					<Link to='/' className='text-decoration-none text-white'>
+						<h3>Transport Inc</h3>
+					</Link>
 					<p className='mb-1 my-3 my-md-0'>
 						&copy;sarkerpabon {new Date().getFullYear()} | all right reserved{" "}
 					</p>
