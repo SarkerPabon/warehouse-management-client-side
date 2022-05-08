@@ -14,10 +14,8 @@ const Banner = () => {
 					alt='First slide'
 				/>
 				<Carousel.Caption>
-					<p className={`text-uppercase mb-1`}>
-						We use latest medical technology.
-					</p>
-					<h3 className='display-5'>Let Us Brighten Your Smile</h3>
+					<p className={`text-uppercase mb-1`}>Shine Your Way</p>
+					<h3 className='display-5'>The Cars We Drive Say a Lot About Us</h3>
 				</Carousel.Caption>
 			</Carousel.Item>
 			<Carousel.Item>

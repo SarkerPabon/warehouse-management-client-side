@@ -10,7 +10,7 @@ const ProductDetails = () => {
 	const [addQty, setAddQty] = useState(0);
 	const { id } = useParams();
 
-	const { name, imgUrl, description, price, quantity, sold } = product;
+	const { _id, name, imgUrl, description, price, quantity, sold } = product;
 
 	useEffect(() => {
 		axios
@@ -60,7 +60,10 @@ const ProductDetails = () => {
 						<div className='card'>
 							<img src={imgUrl} className='card-img-top' alt='' />
 							<div className='card-body'>
-								<h5 className='card-title text-center mb-2'>{name}</h5>
+								<div className='d-flex justify-content-between mb-3'>
+									<h5 className='card-title text-center'>PID: {_id}</h5>
+									<h5 className='card-title text-center '>{name}</h5>
+								</div>
 								<p className='card-text'>{description}</p>
 								<div className='d-flex justify-content-between mb-2'>
 									<h5 className='card-subtitle'>Price: {price}</h5>

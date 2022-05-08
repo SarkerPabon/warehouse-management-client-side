@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import "./SingleProduct.css";
 
 const SingleProduct = ({ product, handleDelete }) => {
 	const { _id, name, supplierName, imgUrl, description, price, quantity } =
@@ -7,7 +8,13 @@ const SingleProduct = ({ product, handleDelete }) => {
 	return (
 		<div className='col-md-4 col-sm-12'>
 			<div className='card'>
-				<img src={imgUrl} className='card-img-top' alt='' />
+				<img
+					src={imgUrl}
+					className='card-img-top img-res'
+					alt=''
+					width='200'
+					height='200'
+				/>
 				<div className='card-body'>
 					<div className='d-flex justify-content-between mb-3'>
 						<h5 className='card-title'>{name}</h5>
