@@ -18,7 +18,7 @@ const Header = () => {
 		<Navbar bg='secondary' expand='lg'>
 			<Container>
 				<Navbar.Brand as={Link} to='/' className='text-white'>
-					Navbar scroll
+					Transport Inc
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='navbarScroll' />
 				<Navbar.Collapse id='navbarScroll'>
@@ -34,6 +34,14 @@ const Header = () => {
 							style={navLinkStyles}
 						>
 							Home
+						</Nav.Link>
+						<Nav.Link
+							as={NavLink}
+							to='/blog'
+							className='text-white'
+							style={navLinkStyles}
+						>
+							Blog
 						</Nav.Link>
 						{user ? (
 							<>

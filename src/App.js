@@ -5,6 +5,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./Pages/Authentication/Login";
 import Registration from "./Pages/Authentication/Registration";
 import RequiredAuth from "./Pages/Authentication/RequiredAuth";
+import Blog from "./Pages/Blog";
+import Error from "./Pages/Error";
 import Footer from "./Pages/Footer";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home/Home";
@@ -19,6 +21,7 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path='/' element={<Home />} />
+				<Route path='/blog' element={<Blog />} />
 				<Route path='/login' element={<Login />} />
 				<Route path='/register' element={<Registration />} />
 				<Route
@@ -53,6 +56,7 @@ function App() {
 						</RequiredAuth>
 					}
 				/>
+				<Route path='*' element={<Error />} />
 			</Routes>
 			<Footer />
 			<ToastContainer />
