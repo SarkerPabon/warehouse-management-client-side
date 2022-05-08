@@ -9,7 +9,7 @@ import Footer from "./Pages/Footer";
 import Header from "./Pages/Header";
 import Home from "./Pages/Home/Home";
 import AddProduct from "./Pages/Products/AddProduct";
-import MyProducts from "./Pages/Products/MyProducts";
+import MyProductsTable from "./Pages/Products/MyProductsTable";
 import ProductDetails from "./Pages/Products/ProductDetails";
 import ProductsTable from "./Pages/Products/ProductsTable";
 
@@ -33,7 +33,7 @@ function App() {
 					path='/myProducts'
 					element={
 						<RequiredAuth>
-							<MyProducts />
+							<MyProductsTable />
 						</RequiredAuth>
 					}
 				/>
