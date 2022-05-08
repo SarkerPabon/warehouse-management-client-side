@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useGlobalFilter, useTable } from "react-table";
+import { useGlobalFilter, usePagination, useTable } from "react-table";
 import { toast } from "react-toastify";
 import Loader from "../Share/Loader";
 import { GlobalFilter } from "./GlobalFilter";
@@ -58,13 +58,13 @@ const ProductsTable = () => {
 					<>
 						<Link
 							to={`/products/${props.row.original._id}`}
-							className='btn btn-outline-secondary'
+							className='btn btn-outline-secondary mb-1'
 						>
 							Details
 						</Link>{" "}
 						<button
 							onClick={() => handleDelete(props.row.original._id)}
-							className='btn btn-danger'
+							className='btn btn-outline-danger mb-1'
 						>
 							Delete
 						</button>
@@ -114,26 +114,47 @@ const ProductsTable = () => {
 	const columns = useMemo(() => COLUMNS, []);
 	const data = useMemo(() => products, [products]);
 
-	const tableInstance = useTable({ columns, data }, useGlobalFilter);
+	const tableInstance = useTable(
+		{
+			columns,
+			data,
+			initialState: {
+				pageSize: 3,
+				pageIndex: 0,
+			},
+		},
+
+		useGlobalFilter,
+		usePagination
+	);
 
 	const {
 		getTableProps,
 		getTableBodyProps,
 		headerGroups,
-		rows,
+		// rows,
+		page,
+		nextPage,
+		previousPage,
+		canNextPage,
+		canPreviousPage,
+		pageOptions,
+		gotoPage,
+		pageCount,
+		setPageSize,
 		prepareRow,
 		setGlobalFilter,
 		state,
 	} = tableInstance;
 
-	const { globalFilter } = state;
+	const { globalFilter, pageIndex, pageSize } = state;
 
 	return (
 		<div className=''>
 			{loading ? (
 				<Loader />
 			) : (
-				<>
+				<div className='table-responsive'>
 					<GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
 					<table {...getTableProps()} className='table table-striped'>
 						<thead>
@@ -148,7 +169,7 @@ const ProductsTable = () => {
 							))}
 						</thead>
 						<tbody {...getTableBodyProps()}>
-							{rows.map((row) => {
+							{page.map((row) => {
 								prepareRow(row);
 								return (
 									<tr key={row.id} {...row.getRowProps()}>
@@ -164,7 +185,63 @@ const ProductsTable = () => {
 							})}
 						</tbody>
 					</table>
-				</>
+
+					<div className='container'>
+						<div className='row  p-3'>
+							<div className='d-flex justify-content-center mb-3'>
+								<span className='pt-2 text-secondary'>
+									Page{" "}
+									<strong className='text-secondary'>
+										{pageIndex + 1} of {pageOptions.length}
+									</strong>{" "}
+								</span>
+
+								<select
+									className='form-select ms-2'
+									style={{ width: "150px", border: "1px solid #ddd" }}
+									value={pageSize}
+									onChange={(e) => setPageSize(Number(e.target.value))}
+								>
+									{[3, 6, 12].map((pageSize) => (
+										<option key={pageSize} value={pageSize}>
+											Show {pageSize}
+										</option>
+									))}
+								</select>
+							</div>
+							<div className='d-flex justify-content-center'>
+								<button
+									className='me-2 btn btn-outline-danger'
+									onClick={() => gotoPage(0)}
+									disabled={!canPreviousPage}
+								>
+									{"<<"}
+								</button>
+								<button
+									className='me-2 btn btn-outline-danger'
+									onClick={() => previousPage()}
+									disabled={!canPreviousPage}
+								>
+									Previous
+								</button>
+								<button
+									className='ms-2 btn btn-outline-danger'
+									onClick={() => nextPage()}
+									disabled={!canNextPage}
+								>
+									Next
+								</button>
+								<button
+									className='ms-2 btn btn-outline-danger'
+									onClick={() => gotoPage(pageCount - 1)}
+									disabled={!canNextPage}
+								>
+									{">>"}
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			)}
 		</div>
 	);
