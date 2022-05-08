@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { useTable } from "react-table";
+import { useGlobalFilter, useTable } from "react-table";
 import { toast } from "react-toastify";
 import Loader from "../Share/Loader";
+import { GlobalFilter } from "./GlobalFilter";
 import "./table.css";
 
 const ProductsTable = () => {
@@ -113,45 +114,57 @@ const ProductsTable = () => {
 	const columns = useMemo(() => COLUMNS, []);
 	const data = useMemo(() => products, [products]);
 
-	const tableInstance = useTable({ columns, data });
+	const tableInstance = useTable({ columns, data }, useGlobalFilter);
 
-	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-		tableInstance;
+	const {
+		getTableProps,
+		getTableBodyProps,
+		headerGroups,
+		rows,
+		prepareRow,
+		setGlobalFilter,
+		state,
+	} = tableInstance;
+
+	const { globalFilter } = state;
 
 	return (
 		<div className=''>
 			{loading ? (
 				<Loader />
 			) : (
-				<table {...getTableProps()} className='table table-striped'>
-					<thead>
-						{headerGroups.map((headerGroup) => (
-							<tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
-								{headerGroup.headers.map((column) => (
-									<th key={column.id} {...column.getHeaderProps()}>
-										{column.render("Header")}
-									</th>
-								))}
-							</tr>
-						))}
-					</thead>
-					<tbody {...getTableBodyProps()}>
-						{rows.map((row) => {
-							prepareRow(row);
-							return (
-								<tr key={row.id} {...row.getRowProps()}>
-									{row.cells.map((cell) => {
-										return (
-											<td key={cell.id} {...cell.getCellProps()}>
-												{cell.render("Cell")}
-											</td>
-										);
-									})}
+				<>
+					<GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} />
+					<table {...getTableProps()} className='table table-striped'>
+						<thead>
+							{headerGroups.map((headerGroup) => (
+								<tr key={headerGroup.id} {...headerGroup.getHeaderGroupProps()}>
+									{headerGroup.headers.map((column) => (
+										<th key={column.id} {...column.getHeaderProps()}>
+											{column.render("Header")}
+										</th>
+									))}
 								</tr>
-							);
-						})}
-					</tbody>
-				</table>
+							))}
+						</thead>
+						<tbody {...getTableBodyProps()}>
+							{rows.map((row) => {
+								prepareRow(row);
+								return (
+									<tr key={row.id} {...row.getRowProps()}>
+										{row.cells.map((cell) => {
+											return (
+												<td key={cell.id} {...cell.getCellProps()}>
+													{cell.render("Cell")}
+												</td>
+											);
+										})}
+									</tr>
+								);
+							})}
+						</tbody>
+					</table>
+				</>
 			)}
 		</div>
 	);
