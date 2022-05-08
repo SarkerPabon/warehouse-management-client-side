@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import {
 	useCreateUserWithEmailAndPassword,
@@ -56,6 +57,17 @@ const Registration = () => {
 		console.log(name, email, password, confirmPassword);
 
 		await createUserWithEmailAndPassword(email, password);
+
+		// JWT
+		const { data } = await axios.post(
+			`https://wearhouse-management-mern.herokuapp.com/login`,
+			{
+				email,
+			}
+		);
+		// console.log("JWT Data: ", data);
+		localStorage.setItem("jwt", data.accessToken);
+
 		toast.success("User Created Successfully", {
 			toastId: "user-created-successfully",
 			theme: "colored",

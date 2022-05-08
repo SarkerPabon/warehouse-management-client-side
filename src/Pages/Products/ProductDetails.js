@@ -10,7 +10,7 @@ const ProductDetails = () => {
 	const [addQty, setAddQty] = useState(0);
 	const { id } = useParams();
 
-	const { _id, name, imgUrl, description, price, quantity, sold } = product;
+	const { name, imgUrl, description, price, quantity, sold } = product;
 
 	useEffect(() => {
 		axios

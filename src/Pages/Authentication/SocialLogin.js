@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { Navigate, useLocation } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -13,7 +14,21 @@ const SocialLogin = () => {
 	let from = location.state?.from?.pathname || "/";
 
 	if (googleUser) {
-		console.log("Google User: ", googleUser);
+		const email = googleUser.user.email;
+		console.log("Google User Email: ", email);
+
+		// JWT
+		axios
+			.post(`https://wearhouse-management-mern.herokuapp.com/login`, {
+				email,
+			})
+			.then(({ data }) => {
+				// console.log("JWT Data: ", data);
+
+				localStorage.setItem("jwt", data.accessToken);
+			})
+			.catch((error) => console.log(error));
+
 		return <Navigate to={from} replace={true} />;
 	}
 

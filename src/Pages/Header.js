@@ -14,6 +14,11 @@ const Header = () => {
 		};
 	};
 
+	const handleSignOut = () => {
+		localStorage.removeItem("jwt");
+		signOut(auth);
+	};
+
 	return (
 		<Navbar bg='secondary' expand='lg'>
 			<Container>
@@ -70,7 +75,7 @@ const Header = () => {
 									Add Product
 								</Nav.Link>
 								<button
-									onClick={() => signOut(auth)}
+									onClick={handleSignOut}
 									className='btn btn-primray btn-link text-white text-decoration-none'
 								>
 									Sign Out

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 import {
 	useSendPasswordResetEmail,
@@ -48,6 +49,19 @@ const Login = () => {
 		console.log(email, password);
 
 		signInWithEmailAndPassword(email, password).then(() => {
+			// JWT
+			axios
+				.post(`https://wearhouse-management-mern.herokuapp.com/login`, {
+					email,
+				})
+				.then(({ data }) => {
+					// console.log("JWT Data: ", data);
+
+					localStorage.setItem("jwt", data.accessToken);
+				})
+				.catch((error) => console.log(error));
+
+			// Toast
 			toast.success("User Logged In Successfully", {
 				toastId: "user-login-successfully",
 				theme: "colored",
@@ -69,6 +83,7 @@ const Login = () => {
 				lengthError: "",
 			});
 		}
+
 		await sendPasswordResetEmail(email);
 
 		setEmail("");

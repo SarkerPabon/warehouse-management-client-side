@@ -1,7 +1,8 @@
 import axios from "axios";
+import { signOut } from "firebase/auth";
 import { useEffect, useMemo, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useGlobalFilter, usePagination, useTable } from "react-table";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
@@ -27,7 +28,7 @@ const MyProductsTable = () => {
 			Header: "Image URL",
 			accessor: "imgUrl",
 			Cell: ({ row }) => {
-				console.log(row.values.imgUrl);
+				// console.log(row.values.imgUrl);
 				return (
 					<div className='table-image-container'>
 						<img className='table-image' src={`${row.values.imgUrl}`} alt='' />
@@ -79,21 +80,38 @@ const MyProductsTable = () => {
 	const [loading, setLoading] = useState(true);
 	const [products, setProducts] = useState([]);
 	const [user, userLoading] = useAuthState(auth);
+	// const [error, setError] = useState("");
 	const email = user.email;
-	console.log(email);
+	const navigate = useNavigate();
+	// console.log(email);
 
 	useEffect(() => {
-		axios
-			.get(
-				`https://wearhouse-management-mern.herokuapp.com/products/myProducts?email=${email}`
-			)
-			.then((response) => {
-				setLoading(false);
-				setProducts(response.data);
-				// console.log(products);
-			})
-			.catch((error) => console.log(error));
-	}, []);
+		if (email) {
+			axios
+				.get(
+					`https://wearhouse-management-mern.herokuapp.com/products/myProducts?email=${email}`,
+					{
+						headers: {
+							authorization: `Bearer ${localStorage.getItem("jwt")}`,
+						},
+					}
+				)
+				.then((response) => {
+					setProducts(response.data);
+					setLoading(false);
+					// console.log(products);
+				})
+				.catch((error) => {
+					console.log(error.message);
+					toast.error(error.message, { theme: "dark", toastId: "jwt-error" });
+					localStorage.removeItem("jwt");
+					signOut(auth);
+					navigate("/login");
+				});
+		} else {
+			console.log("Try Again");
+		}
+	}, [email]);
 
 	const handleDelete = (_id) => {
 		const confirmation = window.confirm(`Are you sure sure? id: ${_id}`);
