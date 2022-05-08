@@ -22,7 +22,7 @@ export const ChooseAccordion = () => {
 				<Accordion.Header>
 					{" "}
 					<span className='text-danger text-bold fs-5'>
-						We Are Creative & Professional
+						We Are Give Best Services & Deals
 					</span>
 				</Accordion.Header>
 				<Accordion.Body className='text-muted'>
